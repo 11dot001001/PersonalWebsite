@@ -1,0 +1,46 @@
+@font-face {
+	font-family: Roboto Slab,serif;
+}
+
+.navigation-menu {
+	--index: calc(1vw + 1vh);
+	--transition: 2s cubic-bezier(.29,.78,.37,1.08);
+	display: flex;
+	position: relative;
+	justify-content: center;
+	width: 100%;
+}
+
+.navigation-menu-background {
+	display: flex;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(128,128,128,20%);
+	z-index: -1;
+	filter: blur(10px);
+}
+
+.navigation-menu-items {
+	display: flex;
+	position: center;
+	padding: 10px;
+}
+
+.navigation-menu-items-item {
+	margin: 0 3vw 0 3vw;
+	padding: 10px;
+}
+
+	.navigation-menu-items-item h1 {
+		font-family: Roboto Slab,serif;
+		text-transform: uppercase;
+		font-size: calc(var(--index) * 1);
+		letter-spacing: calc(var(--index) / 37);
+		transition: var(--transition);
+		font-weight: 500;
+	}
+
+		.navigation-menu-items-item h1:hover {
+			transform: scale(1.1);
+		}

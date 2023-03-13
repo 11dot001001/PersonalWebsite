@@ -1,0 +1,34 @@
+﻿@using PersonalWebsite.Client.Services;
+@using static PersonalWebsite.Client.Pages.Posts;
+@inject BrowserResizer BrowserResizer
+
+<div class="post-list-item @OrientationClass" onclick="@OnPostListItemClick">
+    <div class="post-list-item-background-image" style="background-image: url(@PostListItemVm.MediaContent.Url)" />
+    <img class="post-list-item-image" decoding="async" src=@PostListItemVm.MediaContent.Url />
+</div>
+
+@code {
+    [Parameter]
+    public PostListItemVm PostListItemVm { get; set; }
+    [CascadingParameter]
+    public SetActivePostAction SetActivePost { get; set; }
+
+    public int Width { get; set; }
+    public string? OrientationClass { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Width = (await BrowserResizer.GetDimensions()).Width;
+    }
+    protected override void OnParametersSet()
+    {
+        switch (PostListItemVm.MediaContent.Orientation)
+        {
+            case MediaOrientation.Horizontal: OrientationClass = "media-orientation-horizontal"; break;
+            case MediaOrientation.Vertical: OrientationClass = "media-orientation-vertical"; break;
+            default: throw new ArgumentOutOfRangeException(nameof(MediaOrientation));
+        }
+    }
+
+    public void OnPostListItemClick() => SetActivePost(PostListItemVm.Id);
+}

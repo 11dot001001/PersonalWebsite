@@ -1,0 +1,13 @@
+﻿[Unit]
+Description=Chuvi web site
+
+[Service]
+Type=exec
+User=root
+Restart=on-failure
+ExecStart=/opt/Chuvi.PersonalSite/PersonalWebsite.Server
+WorkingDirectory=/opt/Chuvi.PersonalSite/
+Environment="ASPNETCORE_URLS=http://127.0.0.1:5000"
+
+[Install]
+WantedBy=multi-user.target

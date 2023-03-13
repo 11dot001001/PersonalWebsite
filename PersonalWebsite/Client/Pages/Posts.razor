@@ -1,0 +1,46 @@
+﻿@page "/posts"
+@using Microsoft.JSInterop;
+@using PersonalWebsite.Client.Pages.Components.Posts
+@using PersonalWebsite.Client.Services;
+@using PersonalWebsite.Shared.Media;
+@using PersonalWebsite.Shared.Posts;
+@using System.Text.Json
+@using System.Text.Json.Serialization
+@inject HttpClient _httpClient;
+
+<PageTitle>Posts</PageTitle>
+<CascadingValue Value="ActivePost">
+    <Post/>
+</CascadingValue>
+<CascadingValue Value="SetActivePost">
+    <div class="post-list">
+        @if (PostList != null)
+            @foreach (var post in PostList)
+            {
+                <PostListItem PostListItemVm="post" />
+            }
+    </div>
+</CascadingValue>
+
+@code {
+    public delegate Task SetActivePostAction(Guid id);
+
+    private SetActivePostAction SetActivePost { get; set; }
+
+    private PostVm ActivePost { get; set; }
+
+    private PostListItemVm[] PostList;
+
+    private string BaseAddress { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        BaseAddress = _httpClient.BaseAddress.ToString();
+        PostList = await _httpClient.GetFromJsonAsync<PostListItemVm[]>("api/Posts");
+        SetActivePost = async id =>
+        {
+            ActivePost = await _httpClient.GetFromJsonAsync<PostVm>($"api/Posts/{id}");
+            StateHasChanged();
+        };
+    }
+}

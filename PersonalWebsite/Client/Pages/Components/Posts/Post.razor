@@ -1,0 +1,75 @@
+﻿@if (ActivePost != null)
+{
+    <div class="post">
+        <div class="post-content">
+            <div class="post-media">
+                <div class="post-image @HasManyMediaItems" style="background-image: url(@SelectedListItem.Url)" />
+                @if (@PostMediaListItems.Count > 1)
+                {
+                    <div class="post-media-list">
+                        @foreach (var listItem in PostMediaListItems)
+                        {
+                            <div class="post-media-list-item @listItem.SelectedClass" style="background-image: url(@listItem.Url)" onclick="@(() => OnPostMediaListItemClick(listItem))" />
+                        }
+                    </div>
+                }
+            </div>
+            <hr style="width:15px; height: auto">
+            <div class="post-description">
+                <h1 class="post-description-title">@ActivePost.Title</h1>
+                <p class="post-description-description">@ActivePost.Description</p>
+                <p class="post-description-date">@ActivePost.CreatedAt.ToString("D")</p>
+            </div>
+            <div class="post-close">
+                <svg class="post-close-icon" viewBox="0 0 24 24" aria-hidden="true" aria-label="" role="img" onclick="@ClosePost">
+                    <path d="m15.18 12 7.16-7.16c.88-.88.88-2.3 0-3.18-.88-.88-2.3-.88-3.18 0L12 8.82 4.84 1.66c-.88-.88-2.3-.88-3.18 0-.88.88-.88 2.3 0 3.18L8.82 12l-7.16 7.16c-.88.88-.88 2.3 0 3.18.44.44 1.01.66 1.59.66.58 0 1.15-.22 1.59-.66L12 15.18l7.16 7.16c.44.44 1.01.66 1.59.66.58 0 1.15-.22 1.59-.66.88-.88.88-2.3 0-3.18L15.18 12z">
+                    </path>
+                </svg>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    [CascadingParameter]
+    private PostVm ActivePost { get; set; } = null;
+
+    private List<ListItem> PostMediaListItems { get; set; }
+
+    private ListItem SelectedListItem { get; set; }
+
+
+    private string HasManyMediaItems => PostMediaListItems.Count() > 1 ? "post-image-with-items" : "";
+
+    private void OnPostMediaListItemClick(ListItem listItem)
+    {
+        SelectedListItem.Selected = false;
+        SelectedListItem = listItem;
+        SelectedListItem.Selected = true;
+        StateHasChanged();
+    }
+
+    protected override void OnParametersSet()
+    {
+        if (ActivePost != null)
+        {
+            PostMediaListItems = ActivePost.MediaContents.Select(x => new ListItem { Url = x.Url }).ToList();
+            PostMediaListItems[0].Selected = true;
+            SelectedListItem = PostMediaListItems[0];
+        }
+    }
+
+    private void ClosePost()
+    {
+        ActivePost = null;
+        StateHasChanged();
+    }
+
+    private class ListItem
+    {
+        public string Url { get; set; }
+        public bool Selected { get; set; }
+
+        public string SelectedClass => Selected ? "post-media-list-item-selected" : "post-media-list-item-nonselected";
+    }
+}
