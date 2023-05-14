@@ -1,6 +1,4 @@
-﻿/*Навигационное меню*/
-
-.navigation-menu-icon {
+﻿.navigation-menu-icon {
 	position: fixed;
 	top: 5%;
 	right: 5%;
@@ -11,7 +9,7 @@
 	background-position: center;
 	background-color: rgba(128,128,128,30%);
 	border-radius: 8px;
-	z-index: 2;
+	z-index: 71;
 }
 
 	.navigation-menu-icon:hover {
@@ -20,37 +18,32 @@
 		cursor: pointer;
 	}
 
-.navigation-menu.navigation-active .navigation-menu-icon {
-	background-image: url("/images/landing/close-icon.svg");
-	transition: all 200ms linear;
-	width: 46px;
-	height: 46px;
-}
+	.navigation-menu-icon.navigation-active {
+		background-image: url("/images/landing/close-icon.svg");
+		transition: all 200ms linear;
+		width: 46px;
+		height: 46px;
+	}
 
 .navigation-menu {
+	visibility: hidden;
+	display: flex;
 	position: fixed;
 	width: 100vw;
 	height: 100vh;
 	left: 0;
 	top: 0;
-	z-index: 100;
-	user-select: none;
-}
-
-.navigation-menu-container {
-	display: flex;
-	visibility: hidden;
-	width: 100vw;
-	height: 100vh;
+	z-index: 70;
 	align-items: center;
 	align-content: center;
 	justify-content: center;
 	color: white;
+	user-select: none;
 }
 
-.navigation-menu.navigation-active .navigation-menu-container {
-	visibility: visible;
-}
+	.navigation-menu.navigation-active {
+		visibility: visible;
+	}
 
 .navigation-menu-list {
 	position: fixed;
@@ -103,19 +96,19 @@
 
 
 
-.navigation-menu.navigation-active .navigation-menu-container:after {
+.navigation-menu.navigation-active:after {
 	transform: translateX(0%) translateY(0%);
 	transition-delay: .1s;
 	border-radius: 0;
 }
 
-.navigation-menu.navigation-active .navigation-menu-container:before {
+.navigation-menu.navigation-active:before {
 	transform: translateX(0%) translateY(0%);
 	transition-delay: 0s;
 	border-radius: 0;
 }
 
-.navigation-menu-container:before, .navigation-menu-container:after {
+.navigation-menu:before, .navigation-menu:after {
 	content: "";
 	position: fixed;
 	width: 100vw;
@@ -129,11 +122,11 @@
 	transform: translateX(100%) translateY(-100%);
 }
 
-.navigation-menu-container:after {
+.navigation-menu:after {
 	background-color: rgba(9,9,12,1);
 	transition-delay: 0s;
 }
 
-.navigation-menu-container:before {
+.navigation-menu:before {
 	transition-delay: .2s;
 }

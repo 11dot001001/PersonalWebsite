@@ -1,43 +1,42 @@
-<div class="navigation-menu @(@NavigationActiveClass ? "navigation-active" : string.Empty)">
-    <div class="navigation-menu-icon" @onclick="OnNavigationMenuIconClick" />
-    <div class="navigation-menu-container">
-        <div class="navigation-menu-list">
-            <div class="navigation-menu-list-item">
-                <NavLink class="navigation-menu-link" href="" @onclick="CloseMenu" Match="NavLinkMatch.All">
-                    <h2>HOME</h2>
-                </NavLink>
-            </div>
-            <div class="navigation-menu-list-item">
-                <NavLink class="navigation-menu-link" href="albums" @onclick="CloseMenu">
-                    <h2>ALBUMS</h2>
-                </NavLink>
-            </div>
-            <div class="navigation-menu-list-item">
-                <NavLink class="navigation-menu-link" href="posts" @onclick="CloseMenu">
-                    <h2>POSTS</h2>
-                </NavLink>
-            </div>
-            <div class="navigation-menu-list-item">
-                <NavLink class="navigation-menu-link" href="contact" @onclick="CloseMenu">
-                    <h2>CONTACT</h2>
-                </NavLink>
-            </div>
+<div class="navigation-menu-icon @NavigationActiveClass" @onclick="OnNavigationMenuIconClick" />
+<div class="navigation-menu @NavigationActiveClass">
+    <div class="navigation-menu-list">
+        <div class="navigation-menu-list-item">
+            <NavLink class="navigation-menu-link" href="" @onclick="CloseMenu" Match="NavLinkMatch.All">
+                <h2>HOME</h2>
+            </NavLink>
+        </div>
+        <div class="navigation-menu-list-item">
+            <NavLink class="navigation-menu-link" href="albums" @onclick="CloseMenu">
+                <h2>ALBUMS</h2>
+            </NavLink>
+        </div>
+        <div class="navigation-menu-list-item">
+            <NavLink class="navigation-menu-link" href="posts" @onclick="CloseMenu">
+                <h2>POSTS</h2>
+            </NavLink>
+        </div>
+        <div class="navigation-menu-list-item">
+            <NavLink class="navigation-menu-link" href="contact" @onclick="CloseMenu">
+                <h2>CONTACT</h2>
+            </NavLink>
         </div>
     </div>
 </div>
 
 @code {
-    public bool NavigationActiveClass { get; set; }
+    public bool NavigationActive { get; set; }
+    public string NavigationActiveClass => NavigationActive ? "navigation-active" : string.Empty;
 
     public void OnNavigationMenuIconClick(MouseEventArgs mouseEventArgs)
     {
-        NavigationActiveClass = !NavigationActiveClass;
+        NavigationActive = !NavigationActive;
         StateHasChanged();
     }
 
     public void CloseMenu(MouseEventArgs mouseEventArgs)
     {
-        NavigationActiveClass = false;
+        NavigationActive = false;
         StateHasChanged();
     }
 }
