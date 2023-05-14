@@ -1,8 +1,43 @@
 ﻿@page "/"
 <PageTitle>Main</PageTitle>
 
-<h3>Main</h3>
+<div class="main-section">
+    <div class="main-section-image" />
+    @*<div class="main-section-image-dimmer" />*@
+    <div class="main-section-text">
+        <h1>
+            Hi. I’m<br>
+            ALEKSEY<br>
+            CHUVILKIN
+        </h1>
+        <h5>
+            Here is my creativity
+        </h5>
+    </div>
+</div>
+
+<div class="programming-description">
+    <div class="programming-description-image-block">
+        <div class="programming-description-image" />
+    </div>
+    <div class="programming-description-text">
+        <h3>I’m software developer.</h3>
+        <h4>
+            My main activity is the <br>
+            development of high-load<br>
+            applications on .net
+        </h4>
+        <h5>Dev experience: ~@DevExperienceDuration years</h5>
+    </div>
+</div>
+
+<a href="#main-section">
+    <div class="page-static-top-scroll" />
+</a>
+
+
 
 @code {
-
+    public DateTime StartDevExperience { get; } = new DateTime(2016, 9, 1);
+    public int DevExperienceDuration => (int)((DateTime.Now - StartDevExperience).TotalDays / 365);
 }

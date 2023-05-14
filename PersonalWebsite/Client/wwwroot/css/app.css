@@ -2,6 +2,7 @@
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    scroll-behavior: smooth;
 }
 
 h1:focus {
@@ -13,7 +14,6 @@ a, a:link, a:visited, a:focus, a:hover, a:active {
     text-decoration: none;
     cursor: pointer;
 }
-
 
 .content {
 }
@@ -58,3 +58,38 @@ a, a:link, a:visited, a:focus, a:hover, a:active {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
+
+h1 {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 128px;
+}
+
+h2 {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 96px;
+}
+
+h3 {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 64px;
+}
+
+h4 {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 48px;
+}
+
+h5 {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 32px;
+}
