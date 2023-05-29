@@ -1,8 +1,33 @@
 ﻿@page "/albums"
+@using PersonalWebsite.Client.Pages.Components.Albums
+@inject HttpClient _httpClient;
+
 <PageTitle>Albums</PageTitle>
 
-<h3>Albums</h3>
+<div class="albums-description">
+    <h1>Albums</h1>
+    <h5>Here are collected stylized pages</h5>
+</div>
+
+<div class="album-list">
+    @if (AlbumList != null)
+    {
+        ImagePosition imagePosition = ImagePosition.Right;
+        @foreach (var album in AlbumList)
+        {
+            <AlbumListItem AlbumListItemVm="album" ImagePosition="@imagePosition" />
+            imagePosition = imagePosition == ImagePosition.Left ? 
+                ImagePosition.Right : 
+                ImagePosition.Left;
+        }
+    }
+</div>
 
 @code {
+    private AlbumListItemVm[]? AlbumList;
 
+    protected override async Task OnInitializedAsync()
+    {
+        AlbumList = await _httpClient.GetFromJsonAsync<AlbumListItemVm[]>("api/Albums");
+    }
 }

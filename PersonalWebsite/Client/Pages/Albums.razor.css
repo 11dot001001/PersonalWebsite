@@ -1,0 +1,15 @@
+﻿.albums-description {
+	width: 100%;
+	text-align: center;
+	margin-top: 2%;
+	margin-bottom: 2%;
+}
+
+.album-list {
+	display: flex;
+	position: absolute;
+	width: 80%;
+	flex-wrap: wrap;
+	left: 10%;
+	margin-top: 5%;
+}

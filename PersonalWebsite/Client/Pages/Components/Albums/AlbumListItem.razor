@@ -1,0 +1,25 @@
+﻿<a class="album-list-item" href="/">
+    @if (ImagePosition == ImagePosition.Left)
+    {
+        <div class="album-list-item-image-wrap">
+            <img class="album-list-item-image" decoding="async" src=@AlbumListItemVm.MediaUrl />
+        </div>
+    }
+    <div class="album-list-item-description">
+        <h3 class="description-title">@AlbumListItemVm.Title</h3>
+        <h5 class="description-date">@AlbumListItemVm.CreatedAt.ToString("yyyy")</h5>
+    </div>
+    @if (ImagePosition == ImagePosition.Right)
+    {
+        <div class="album-list-item-image-wrap">
+            <img class="album-list-item-image" decoding="async" src=@AlbumListItemVm.MediaUrl />
+        </div>
+    }
+</a>
+
+@code {
+    [Parameter]
+    public AlbumListItemVm AlbumListItemVm { get; set; }
+    [Parameter]
+    public ImagePosition ImagePosition { get; set; }
+}

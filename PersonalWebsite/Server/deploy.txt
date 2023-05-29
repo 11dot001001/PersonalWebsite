@@ -1,9 +1,10 @@
+
+sudo rm -r ~/Chuvi.PersonalSite
 scp -r ./PersonalWebsite.Release pi@192.168.0.114:~/Chuvi.PersonalSite
 
 sudo rm -r /opt/Chuvi.PersonalSite
-sudo rm -r ~/Chuvi.PersonalSite
-
 sudo cp -r ~/Chuvi.PersonalSite/ /opt/Chuvi.PersonalSite
+
 sudo chmod 777 /opt/Chuvi.PersonalSite/PersonalWebsite.Server
 
 sudo systemctl restart Chuvi.PersonalSite.service
